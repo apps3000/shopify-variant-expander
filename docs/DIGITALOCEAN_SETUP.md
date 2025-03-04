@@ -96,7 +96,7 @@ apt install -y certbot python3-certbot-nginx
 mkdir -p /var/www/variant-expander
 
 # Clone repository
-git clone https://github.com/your-username/shopify-variant-expander.git /var/www/variant-expander
+git clone https://github.com/apps3000/shopify-variant-expander.git /var/www/variant-expander
 
 # Create required directories
 mkdir -p /var/www/variant-expander/nginx/conf.d
