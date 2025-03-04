@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with a specific command (choose one)
-RUN npm ci --production
+RUN npm install --production
 # OR if you prefer npm install
 # RUN npm install --production
 
