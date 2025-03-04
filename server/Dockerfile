@@ -1,15 +1,13 @@
 FROM node:18-alpine
-
 WORKDIR /app
 
-# Copy package.json and package-lock.json files
+# Copy package files (only need to do this once)
 COPY package*.json ./
 
-# Check if package-lock.json exists and copy it if it does
-COPY package-lock.json* ./
-
-# Use safer install command that works whether package-lock.json exists or not
-RUN npm install --production
+# Install dependencies with a specific command (choose one)
+RUN npm ci --production
+# OR if you prefer npm install
+# RUN npm install --production
 
 # Copy application code
 COPY . .
