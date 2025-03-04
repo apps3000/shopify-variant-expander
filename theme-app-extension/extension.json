@@ -1,0 +1,34 @@
+{
+  "name": "Variant Expander",
+  "version": "1.0.0",
+  "shopify": {
+    "theme_extension": {
+      "files": {
+        "assets/variant-expander.css": {
+          "placeholders": true
+        },
+        "assets/variant-expander.js": {
+          "placeholders": true
+        }
+      }
+    }
+  },
+  "extension_points": [
+    {
+      "target": "section.collection",
+      "module": {
+        "assets/variant-expander.js": {
+          "entry_point": "onCollectionSectionLoad"
+        }
+      }
+    },
+    {
+      "target": "product-grid-item",
+      "module": {
+        "assets/variant-expander.js": {
+          "entry_point": "onProductGridItemLoad"
+        }
+      }
+    }
+  ]
+}

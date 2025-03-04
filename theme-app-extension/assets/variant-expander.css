@@ -1,0 +1,267 @@
+.variant-expander-button {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 8px 16px;
+  background-color: var(--color-button-background, #f9f9f9);
+  color: var(--color-button-text, #333);
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.variant-expander-button:hover {
+  background-color: var(--color-button-hover-background, #f0f0f0);
+}
+
+.variant-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Horizontal scrolling variant container */
+.variant-container.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.variant-container.horizontal-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.variant-container.horizontal-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.variant-container.horizontal-scroll .variant-card {
+  flex: 0 0 auto;
+  width: 180px;
+  scroll-snap-align: start;
+}
+
+/* Dropdown variant selector */
+.variant-dropdown-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.variant-dropdown {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.variant-dropdown-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.variant-dropdown-add-button {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: var(--color-primary, #2c6ecb);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.variant-dropdown-add-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Modal variant selector */
+.variant-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variant-modal {
+  background-color: white;
+  border-radius: 4px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 20px;
+  position: relative;
+}
+
+.variant-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.variant-modal-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.variant-modal .variant-container {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.variant-card {
+  border: 1px solid var(--color-border, #eee);
+  border-radius: 4px;
+  padding: 10px;
+  transition: box-shadow 0.2s;
+  background-color: var(--color-background, #fff);
+}
+
+.variant-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.variant-card.compact {
+  padding: 5px;
+}
+
+.variant-card.detailed {
+  padding: 15px;
+}
+
+.variant-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+.variant-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--color-text, #333);
+}
+
+.variant-card.compact .variant-title {
+  font-size: 12px;
+}
+
+.variant-card.detailed .variant-title {
+  font-size: 16px;
+}
+
+.variant-price {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--color-text-subdued, #555);
+}
+
+.variant-inventory {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.variant-inventory.available {
+  color: var(--color-success, #2c883a);
+}
+
+.variant-inventory.unavailable {
+  color: var(--color-error, #cc0000);
+}
+
+.variant-add-button {
+  padding: 6px 12px;
+  background-color: var(--color-primary, #2c6ecb);
+  color: var(--color-primary-contrast, white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+.variant-add-button:hover {
+  background-color: var(--color-primary-hover, #235cad);
+}
+
+.variant-add-button:disabled {
+  background-color: var(--color-disabled, #cccccc);
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .variant-container:not(.horizontal-scroll) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .variant-container:not(.horizontal-scroll) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .variant-card {
+    background-color: var(--color-background-dark, #2a2a2a);
+    border-color: var(--color-border-dark, #444);
+  }
+  
+  .variant-title {
+    color: var(--color-text-dark, #f5f5f5);
+  }
+  
+  .variant-price {
+    color: var(--color-text-subdued-dark, #aaa);
+  }
+  
+  .variant-expander-button {
+    background-color: var(--color-button-background-dark, #444);
+    color: var(--color-button-text-dark, #f5f5f5);
+    border-color: var(--color-border-dark, #555);
+  }
+  
+  .variant-expander-button:hover {
+    background-color: var(--color-button-hover-background-dark, #555);
+  }
+  
+  .variant-modal {
+    background-color: var(--color-background-dark, #2a2a2a);
+    color: var(--color-text-dark, #f5f5f5);
+  }
+  
+  .variant-dropdown {
+    background-color: var(--color-background-dark, #2a2a2a);
+    color: var(--color-text-dark, #f5f5f5);
+    border-color: var(--color-border-dark, #444);
+  }
+}

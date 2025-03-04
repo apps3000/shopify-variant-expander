@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/variant-expander
+      - SHOPIFY_API_KEY=${SHOPIFY_API_KEY}
+      - SHOPIFY_API_SECRET=${SHOPIFY_API_SECRET}
+      - HOST=${HOST}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRY=24h
+    restart: always
+    volumes:
+      - ./server/logs:/app/logs
+      - ./theme-app-extension/assets:/app/public/assets
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+    environment:
+      - REACT_APP_API_URL=http://server:3000
+      - SHOPIFY_API_KEY=${SHOPIFY_API_KEY}
+    restart: always
+
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - server
+      - web
+    restart: always
+
+volumes:
+  mongo-data:
